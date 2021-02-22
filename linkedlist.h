@@ -2,17 +2,24 @@
 struct Node {                                      
    int data; // each listNode contains a character 
    struct Node *nextPtr; // pointer to next node
+   struct Node *prePtr;  // pointer to previous node
 }; // end structure listNode                        
+
+//Move from line 15
+typedef struct Node LLnode; // synonym for struct Node
+typedef LLnode* LLPtr; // synonym for ListNode* (Ptr=pointer)
+
 // prototypes
 
 int deletes( LLPtr *sPtr, int value );
 int isEmpty( LLPtr sPtr );
 void insert( LLPtr *sPtr, int value );
-void printList( LLPtr currentPtr );
+void printList( LLPtr currentPtr );//print list sorted number
+void printListR( LLPtr currentPtr );
 void instructions( void );
 
-typedef struct Node LLnode; // synonym for struct listNode
-typedef LLnode *LLPtr; // synonym for ListNode*
+
+
 
 
 // display program instructions to user
@@ -36,7 +43,8 @@ void insert( LLPtr *sPtr, int value )
    if ( newPtr != NULL ) { // is space available
       newPtr->data = value; // place value in node
       newPtr->nextPtr = NULL; // node does not link to another node
-
+      newPtr->prePtr = NULL;
+      
       previousPtr = NULL;
       currentPtr = *sPtr;
 
@@ -52,6 +60,7 @@ void insert( LLPtr *sPtr, int value )
          *sPtr = newPtr;
       } // end if
       else { // insert new node between previousPtr and currentPtr
+         newPtr->prePtr = previousPtr;
          previousPtr->nextPtr = newPtr;
          newPtr->nextPtr = currentPtr;
       } // end else
@@ -122,3 +131,8 @@ void printList( LLPtr currentPtr )
       puts( "NULL\n" );
    } // end else
 } // end function printList
+
+void printListR ( LLPtr )
+{
+
+}
