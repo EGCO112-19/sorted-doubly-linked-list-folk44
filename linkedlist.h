@@ -148,11 +148,11 @@ void printListR ( LLPtr currentPtr )
       } // end while
       
       puts( "The list is: " );
-      puts( "NULL --> " );
+      printf( "NULL" );
 
       // while not the end of the list
       while ( currentPtr != NULL ) { 
-         printf( "%d --> ", currentPtr->data );
+         printf( " --> %d", currentPtr->data );
          currentPtr = currentPtr->prePtr;   
       } // end while
 
