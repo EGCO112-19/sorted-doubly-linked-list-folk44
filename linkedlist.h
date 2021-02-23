@@ -123,7 +123,7 @@ void printList( LLPtr currentPtr )
       puts( "List is empty.\n" );
    } // end if
    else { 
-      puts( "The list is:" );
+      puts( "The list is: " );
 
       // while not the end of the list
       while ( currentPtr != NULL ) { 
@@ -135,7 +135,29 @@ void printList( LLPtr currentPtr )
    } // end else
 } // end function printList
 
-void printListR ( LLPtr )
+void printListR ( LLPtr currentPtr )
 {
+  // if list is empty
+   if ( isEmpty( currentPtr ) ) {
+      puts( "List is empty.\n" );
+   } // end if
+   else { 
+     // loop to find the last node in the list
+      while ( currentPtr->nextPtr != NULL ) { 
+        previousPtr = currentPtr; // walk to ...  
+        currentPtr = currentPtr->nextPtr; // ... next node  
+      } // end while
+      
+      puts( "The list is: " );
+      puts( "NULL --> " );
 
+      // while not the end of the list
+      while ( currentPtr != NULL ) { 
+         printf( "%d --> ", currentPtr->data );
+         currentPtr = currentPtr->prePtr;   
+      } // end while
+
+      puts( "\n" );
+
+   } // end else
 }
