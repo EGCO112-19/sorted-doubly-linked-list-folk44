@@ -95,10 +95,12 @@ int deletes( LLPtr *sPtr, int value )
          currentPtr = currentPtr->nextPtr; // ... next node  
       } // end while
 
-      // delete node at currentPtr
+      // delete node at currentPtr when found value want to remove
       if ( currentPtr != NULL ) { 
          tempPtr = currentPtr;
          previousPtr->nextPtr = currentPtr->nextPtr;
+         currentPtr = tempPtr->nextPtr; //move currentPtr to next node
+         currentPtr->prePtr=previousPtr;//point back to in font of deleted node
          free( tempPtr );
          return value;
       } // end if
