@@ -81,6 +81,7 @@ int deletes( LLPtr *sPtr, int value )
    if ( value == ( *sPtr )->data ) { 
       tempPtr = *sPtr; // hold onto node being removed
       *sPtr = ( *sPtr )->nextPtr; // de-thread the node
+      ( *sPtr )->prePtr = NULL; //set prePtr of first node = NULL 
       free( tempPtr ); // free the de-threaded node
       return value;
    } // end if
