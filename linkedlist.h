@@ -144,7 +144,6 @@ void printListR ( LLPtr currentPtr )
    else { 
      // loop to find the last node in the list
       while ( currentPtr->nextPtr != NULL ) { 
-        previousPtr = currentPtr; // walk to ...  
         currentPtr = currentPtr->nextPtr; // ... next node  
       } // end while
       
