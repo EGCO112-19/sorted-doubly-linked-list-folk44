@@ -20,8 +20,6 @@ void instructions( void );
 
 
 
-
-
 // display program instructions to user
 void instructions( void )
 { 
@@ -57,12 +55,16 @@ void insert( LLPtr *sPtr, int value )
       // insert new node at beginning of list
       if ( previousPtr == NULL ) { 
          newPtr->nextPtr = *sPtr;
+         if((*sPtr)!=NULL)
+            (*sPtr)->prePtr = newPtr;
          *sPtr = newPtr;
       } // end if
       else { // insert new node between previousPtr and currentPtr
          newPtr->prePtr = previousPtr;
          previousPtr->nextPtr = newPtr;
          newPtr->nextPtr = currentPtr;
+         if(currentPtr != NULL)
+            currentPtr->prePtr=newPtr;
       } // end else
    } // end if
    else {
@@ -81,8 +83,9 @@ int deletes( LLPtr *sPtr, int value )
    if ( value == ( *sPtr )->data ) { 
       tempPtr = *sPtr; // hold onto node being removed
       *sPtr = ( *sPtr )->nextPtr; // de-thread the node
-      ( *sPtr )->prePtr = NULL; //set prePtr of first node = NULL 
       free( tempPtr ); // free the de-threaded node
+      if((*sPtr)!=NULL)
+          ( *sPtr )->prePtr = NULL; //set prePtr of first node = NULL 
       return value;
    } // end if
    else { 
@@ -100,7 +103,8 @@ int deletes( LLPtr *sPtr, int value )
          tempPtr = currentPtr;
          previousPtr->nextPtr = currentPtr->nextPtr;
          currentPtr = tempPtr->nextPtr; //move currentPtr to next node
-         currentPtr->prePtr=previousPtr;//point back to in font of deleted node
+         if(currentPtr != NULL)
+            currentPtr->prePtr=previousPtr;//point back to in font of deleted node
          free( tempPtr );
          return value;
       } // end if
@@ -151,7 +155,7 @@ void printListR ( LLPtr currentPtr )
       printf( "NULL" );
 
       // while not the end of the list
-      while ( currentPtr != NULL ) { 
+      while ( currentPtr != NULL && currentPtr->data ) { 
          printf( " --> %d", currentPtr->data );
          currentPtr = currentPtr->prePtr;   
       } // end while
